@@ -7,7 +7,8 @@ function Main() {
   
 function handleClick(e){
   if (e.target.id === 'loginButton'){
-    const username = document.querySelector('#usernnameInput').value;
+    console.log(document.querySelector('#usernameInput'))
+    const username = document.querySelector('#usernameInput').value;
     const password = document.querySelector('#passwordInput').value;
 
     fetch('/api', {
@@ -21,15 +22,17 @@ function handleClick(e){
     })
     .catch(err => console.logged('error in fetch request', err));
   }
+
+
   if (e.target.id === 'signUpButton'){
     const username = document.querySelector('#usernameInput')
-    const password = document.querySelector('passwordInput')
+    const password = document.querySelector('#passwordInput')
   }
 }
 
   return (
     <div>
-     <HeaderContainer isLoggedIn = { isLoggedIn }/>   
+     <HeaderContainer handleClick = {handleClick} isLoggedIn = { isLoggedIn }/>   
      
     </div> 
   )

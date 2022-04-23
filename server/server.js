@@ -11,14 +11,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, '../build')));
 
   app.get('/', (req, res) =>
     res.status(200).sendFile(path.join(__dirname, '../build/index.html'))
   );
-}
 
+// app.post('/api', (req, res) => {
+//   res.status(200).json({isLoggedIn: true})
+// })
 // handles routing
 const appRouter = express.Router();
 app.use('/knives', appRouter);
