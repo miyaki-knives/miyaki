@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
     "build": "NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development webpack serve --open"
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"cross-env NODE_ENV=development nodemon server/server.js\""
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/wrreiff/Knife-Store#readme",
   "dependencies": {
+    "pg": "^8.7.3",
     "postgres": "^3.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
