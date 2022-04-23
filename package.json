@@ -5,7 +5,7 @@
   "main": "./client/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js",
+    "start": "nodemon server/server.js",
     "build": "NODE_ENV=production webpack",
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"cross-env NODE_ENV=development nodemon server/server.js\""
   },
@@ -25,6 +25,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-modal": "^3.14.4",
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
