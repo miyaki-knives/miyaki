@@ -2,8 +2,8 @@
 const path = require('path');
 const express = require('express');
 const PORT = 3000;
-// const customerController = require('./controllers/customerController.js');
-const knifeController = require('./controllers/knifeController.js');
+const customerController = require('./controllers/customerController');
+const knifeController = require('./controllers/knifeController');
 // invoke express
 const app = express();
 
@@ -42,21 +42,21 @@ appRouter.put('/knives/:id', knifeController.updateKnife, (req, res) => {
   return res.status(200).json(res.locals.updatedKnife);
 });
 
-// appRouter.get('/customers', customerController, (req, res) => {
-//   return res.status(200).json(res.locals.customers);
-// });
+appRouter.get('/customers/:id', customerController.getCustomer, (req, res) => {
+  return res.status(200).json(res.locals.customer);
+});
 
-// appRouter.post('/customers/addCustomer', customerController, (req, res) => {
-//   return res.status(200).json(res.locals.addedCustomer);
-// })
+appRouter.post('/customers/addCustomer', customerController.createCustomer, (req, res) => {
+  return res.status(200).json(res.locals.addedCustomer);
+});
 
-// appRouter.delete('/customers/deleteCustomer', customerController, (req, res) => {
-//   return res.status(200).json(res.locals.deletedCustomer);
-// });
+appRouter.delete('/customers/:id', customerController.deleteCustomer, (req, res) => {
+  return res.status(200).json(res.locals.deletedCustomer);
+});
 
-// appRouter.put('customers/updatedCustomer', customerController, (req, res) => {
-//   return res.status(200).json(res.locals.updatedCustomer);
-// });
+appRouter.put('/customers/:id', customerController.updateCustomer, (req, res) => {
+  return res.status(200).json(res.locals.updatedCustomer);
+});
 
 
 // catch-all router handler for any request to an unknown route
