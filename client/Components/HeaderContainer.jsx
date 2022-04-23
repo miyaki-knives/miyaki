@@ -9,12 +9,11 @@ function HeaderContainer(props){
       </div>
       <div className = 'RightContainer'>
         <div className = 'cartIcon'>Cart </div>
-        <Login isLoggedIn = {props.isLoggedIn} />
+        <Login handleClick ={props.handleClick} isLoggedIn = {props.isLoggedIn} />
       </div>
     </div>
   )
 }
-
 
 
 export default HeaderContainer
