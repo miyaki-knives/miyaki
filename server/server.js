@@ -2,14 +2,8 @@
 const path = require('path');
 const express = require('express');
 const PORT = 3000;
-<<<<<<< HEAD
-const customerController = require('./customerController.js');
-const knifeController = require('./knifeController.js');
-
-=======
 // const customerController = require('./controllers/customerController.js');
 const knifeController = require('./controllers/knifeController.js');
->>>>>>> main
 // invoke express
 const app = express();
 
