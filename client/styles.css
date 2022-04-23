@@ -1,4 +1,33 @@
+body {
+  margin: 0;
+  padding: 0;
+  }
 
-h2 {
-  color: red;
+  #root {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+.HeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(175, 201, 224);
+  padding: 0px 15px;
+}
+
+.RightContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cartIcon {
+  margin-right: 15px;
+}
+
+.inputForm {
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  align-items: center;
 }

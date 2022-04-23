@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
     "build": "NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development webpack serve --open"
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"cross-env NODE_ENV=development nodemon server/server.js\""
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-modal": "^3.14.4",
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
