@@ -49,11 +49,43 @@ customerController.updateCustomer = (req, res, next) => {
 };
 
 customerController.getCustomer = (req, res, next) => {
-  const queryStr = 'SELECT * FROM customer WHERE id = $1';
-  const { id } = req.params;
-  db.query(queryStr, [id])
+  const queryStr = 'SELECT * FROM customer WHERE username = $1';
+  const { username } = req.params;
+  db.query(queryStr, [username])
     .then((data) => {
       res.locals.customer = data.rows;
+      return next();
+    })
+    .catch((err) => 
+      next({
+        log: 'customerController.getCustomer',
+        message: {err: err}
+      })
+    );
+};
+
+customerController.login = (req, res, next) => {
+  const queryStr = 'SELECT * FROM customer WHERE username = $1';
+  const { user, password } = req.body;
+  // console.log('req.body:  ', req.body);
+  db.query(queryStr, [user])
+    .then((data) => {
+      if (password !== data.rows[0].password) {
+        res.locals.authentication = {
+          username: null,
+          message: 'Your password is invalid',
+          isAdmin: false
+        };
+        return next();
+      }
+      res.locals.authentication = {
+        username: data.rows[0].username,
+        message: 'You are logged in',
+        isAdmin: false
+      }
+      if (data.rows[0].isAdmin === 'true'){
+        res.locals.authentication.isAdmin = true;
+      }
       return next();
     })
     .catch((err) => 
