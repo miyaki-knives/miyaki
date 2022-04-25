@@ -58,6 +58,7 @@ function handleClick(e){
         setIsAdmin(false);
       }
     })
+    .catch(err => console.log('error in fetch request', err));
   }
 }
 
