@@ -35,9 +35,9 @@ customerController.deleteCustomer = (req, res, next) => {
 }
 
 customerController.updateCustomer = (req, res, next) => {
-  const { id } = req.params;
-  const { password } = req.body;
-  db.query('UPDATE customer SET password = $1 WHERE id = $2 RETURNING *', [password, id])
+  const { username } = req.params;
+  const { isAdmin } = req.body;
+  db.query('UPDATE customer SET password = $1 WHERE username = $2 RETURNING *', [isAdmin, username])
   .then(data => {
     res.locals.updatedCustomer = data.rows;
     return next();
@@ -81,6 +81,7 @@ customerController.login = (req, res, next) => {
         return next();
       }
       res.locals.authentication = {
+        id: data.rows[0].id,
         username: data.rows[0].username,
         message: 'You are logged in',
         isAdmin: false
@@ -88,6 +89,7 @@ customerController.login = (req, res, next) => {
       if (data.rows[0].isAdmin === 'true'){
         res.locals.authentication.isAdmin = true;
       }
+      console.log(data.rows)
       return next();
     })
     .catch((err) => 

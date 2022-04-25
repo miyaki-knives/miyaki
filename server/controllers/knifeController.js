@@ -19,8 +19,8 @@ knifeController.getAllKnives = (req, res, next) => {
 };
 
 knifeController.createKnife = (req, res, next) => {
-  const { name, length, steel_type, price, type } = req.body;
-  db.query('INSERT INTO knives VALUES (DEFAULT, $1, $2, $3, $4, $5) RETURNING *', [name, length, steel_type, price, type])
+  const { name, length, steel_type, price, type, img, hrc, bevel } = req.body;
+  db.query('INSERT INTO knives VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [name, length, steel_type, price, type, img, hrc, bevel])
     .then((data) => {
       res.locals.addedKnife = data.rows; 
       return next();
