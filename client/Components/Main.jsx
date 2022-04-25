@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import HeaderContainer from './HeaderContainer.jsx';
+import KnivesContainer from './KnivesContainer.jsx';
 
 function Main() {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -44,10 +45,15 @@ function handleClick(e){
 }
 useEffect(() => {console.log('isloggedin: ', isLoggedIn, 'username:  ', username, 'isAdmin: ', isAdmin)});
   return (
-    <div>
-     <HeaderContainer handleClick = {handleClick} isLoggedIn = { isLoggedIn } isAdmin = { isAdmin } username = { username }/>   
-     
-    </div> 
+    <>
+      <div>
+      <HeaderContainer handleClick = {handleClick} isLoggedIn = { isLoggedIn } isAdmin = { isAdmin } username = { username }/>   
+
+      </div> 
+      <div>
+        <KnivesContainer username = {username} isLoggedIn = {isLoggedIn} isAdmin = {isAdmin}/>
+      </div>
+    </>
   )
 }
 
