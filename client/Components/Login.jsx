@@ -45,7 +45,7 @@ function Login(props){
           <input type='password' placeholder='Enter Password' id='passwordInput' />
           <br />
           <button onClick={props.handleClick} id='loginButton'>Login</button>
-          <button id='signUpButton'>Sign up</button>
+          <button onClick={props.handleClick} id='signUpButton'>Sign up</button>
         </div>
         
       </Modal>
