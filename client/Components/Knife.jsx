@@ -7,19 +7,24 @@
  */
 
 import React from 'react';
+import AdminDeleteKnife from './AdminDeleteKnife.jsx';
 
 const Knife = props => {
-  const { id, name, length, steel_type, price, type, img, hrc, bevel } = props;
-
-    return(
+  const { id, name, length, steel_type, price, type, img, hrc, bevel, isAdmin } = props;
+  
+     return(
       <div className="knifeBox">
-        <div><img src={props.img}/></div>
+        <div><img src={props.img} height='300' width='300'/></div>
         <div>{props.name}</div>
-        <div>Length:{props.length}mm</div>
-        <div>Steel:{props.steel_type}</div>
-        <div>Price:${props.price}</div>
-        <div>Type:{props.type}</div>
-        <div>Bevel Symmetry:{props.bevel}</div>
+        <div>Length: {props.length}mm</div>
+        <div>Steel: {props.steel_type}</div>
+        <div>Price: ${props.price}</div>
+        <div>Type: {props.type}</div>
+        <div>Bevel Symmetry: {props.bevel}</div>
+        <div>
+          <button className="addToCartButton" id={`knife-${props.id}`} onClick={props.handleClick}>Add to Cart</button>
+          <AdminDeleteKnife isAdmin = {isAdmin} id = {id}/>
+        </div>
       </div>
     );
 };

@@ -4,6 +4,7 @@ const express = require('express');
 const PORT = 3000;
 const customerController = require('./controllers/customerController');
 const knifeController = require('./controllers/knifeController');
+const cartController = require('./controllers/CartController');
 // invoke express
 const app = express();
 
@@ -24,7 +25,12 @@ app.use(express.urlencoded({ extended: true }));
 const appRouter = express.Router();
 app.use('/knives', appRouter);
 app.use('/customers', appRouter);
-// app.use('/cart', appRouter);
+app.use('/cart', appRouter);
+
+appRouter.post('/cart/addToCart', cartController.addToCart, (req, res) => {
+  console.log('res.locals.added: ', res.locals.addedItem) 
+  return res.status(200).json(res.locals.addedItem)
+}), 
 
 // routers
 appRouter.get('/knives', knifeController.getAllKnives, (req, res) => {

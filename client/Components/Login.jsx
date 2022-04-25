@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const customStyles = {
   content: {
@@ -29,7 +29,14 @@ function Login(props){
     setIsOpen(false);
   }
 
+  useEffect(() => {
+    closeModal();
+}, [props.isLoggedIn])
+
+
   return (
+    //ADD: if props.isLoggedIn is true call closeModal 
+    
     <div>
       <button onClick={openModal} className = 'signInBtn'>{props.isLoggedIn ? 'Log Out' : 'Sign In'}</button> 
       <Modal

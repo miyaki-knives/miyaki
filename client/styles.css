@@ -31,3 +31,14 @@ body {
   background-color: white;
   align-items: center;
 }
+
+.knifeBox {
+  max-width: 400px;
+  max-height: 500px;
+}
+
+#knivesContainerDiv {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
