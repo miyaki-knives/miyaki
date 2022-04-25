@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
   );
 
 // app.post('/api', (req, res) => {
-//   res.status(200).json({isLoggedIn: true})
+//   res.status(200).json({isLogged=In: true})
 // })
 // handles routing
 const appRouter = express.Router();
@@ -46,11 +46,11 @@ appRouter.put('/knives/:id', knifeController.updateKnife, (req, res) => {
 appRouter.get('/customers/:username', customerController.getCustomer, (req, res) => {
   return res.status(200).json(res.locals.customer);
 });
-
-appRouter.post('/customers/addCustomer', customerController.createCustomer, (req, res) => {
-  return res.status(200).json(res.locals.addedCustomer);
+//
+appRouter.post('/customers/addCustomer', customerController.createCustomer, customerController.login, (req, res) => {
+  return res.status(200).json(res.locals.authentication);
 });
-
+//
 appRouter.post('/customers/login', customerController.login, (req, res) => {
   return res.status(200).json(res.locals.authentication);
 });
