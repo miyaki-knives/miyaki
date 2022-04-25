@@ -43,12 +43,16 @@ appRouter.put('/knives/:id', knifeController.updateKnife, (req, res) => {
   return res.status(200).json(res.locals.updatedKnife);
 });
 
-appRouter.get('/customers/:id', customerController.getCustomer, (req, res) => {
+appRouter.get('/customers/:username', customerController.getCustomer, (req, res) => {
   return res.status(200).json(res.locals.customer);
 });
 
 appRouter.post('/customers/addCustomer', customerController.createCustomer, (req, res) => {
   return res.status(200).json(res.locals.addedCustomer);
+});
+
+appRouter.post('/customers/login', customerController.login, (req, res) => {
+  return res.status(200).json(res.locals.authentication);
 });
 
 appRouter.delete('/customers/:id', customerController.deleteCustomer, (req, res) => {
