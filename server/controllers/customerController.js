@@ -3,7 +3,7 @@ const db = require('../models/models');
 const customerController = {};
 
 customerController.createCustomer = (req, res, next) => {
-  const { user, password} = req.body;
+  const { user, password } = req.body;
   let isAdmin = false
   
   db.query('INSERT INTO customer VALUES (DEFAULT, $1, $2, $3) RETURNING *', [user, password, isAdmin])
