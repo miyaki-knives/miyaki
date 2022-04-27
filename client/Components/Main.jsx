@@ -45,6 +45,7 @@ function Main() {
         headers: { 'Content-Type': 'application/json' },
       })
         .then((res) => res.json())
+        .then(() => fetchCart())
         // .then((data) => consol, e.log('add to cart: ', data))
         .catch((err) => console.log('error adding knife:', err));
     }
@@ -135,6 +136,7 @@ function Main() {
           isLoggedIn={isLoggedIn}
           isAdmin={isAdmin}
           handleClick={handleClick}
+          fetchCart={fetchCart}
         />
       </div>
     </>

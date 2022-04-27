@@ -54,27 +54,11 @@ function Cart(props) {
           Array.isArray(props.cartList) &&
           props.cartList.map((item, index) => (
             <div key={`item${index}`}>
-              <div>Knife ID: {item.knife_id}</div>
-              <div>Qty: {item.quantity}</div>
+              <div>Knife: {item.name}</div>
+              <div>Price: {item.price}</div>
+              <button>Delete</button>
             </div>
           ))}
-        {/* <div className='inputForm'>
-          <input type='text' placeholder='Enter Username' id='usernameInput' />
-          <br />
-          <input
-            type='password'
-            placeholder='Enter Password'
-            id='passwordInput'
-          />
-          <br />
-          <button onClick={props.handleClick} id='loginButton'>
-            Login
-          </button>
-          <button onClick={props.handleClick} id='signUpButton'>
-            Sign up
-          </button>
-        </div> */}
-        This is your cart
       </Modal>
     </div>
   );
