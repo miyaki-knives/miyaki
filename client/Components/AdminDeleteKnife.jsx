@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const AdminDeleteKnife = (props) => {
   const deleteKnife = () => {
-    fetch(`./knives/${props.id}`, {
+    fetch(`/knives/${props.id}`, {
       method: 'DELETE',
     }).catch((err) => console.log('COULD NOT DELETE:', err));
   };
