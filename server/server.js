@@ -25,17 +25,21 @@ app.get('/', (req, res) =>
 const appRouter = express.Router();
 
 // cart endpoints
+
+// add to cart
 app.post('/cart/addToCart', cartController.addToCart, (req, res) => {
 	console.log('res.locals.added: ', res.locals.addedItem);
 	return res.status(200).json(res.locals.addedItem);
 });
 
+// get cart
 app.get('/cart/:id', cartController.getCart, (req, res) => {
 	return res.status(200).json(res.locals.cart);
 });
 
-app.delete('/cart?userid&knifeid', cartController.getCart, (req, res) => {
-	return res.status(200).json(res.locals.updatedCart);
+// delete item from cart
+app.post('/cart/deleteFromCart', cartController.deleteFromCart, (req, res) => {
+	return res.status(200).json(res.locals.deletedItems);
 });
 
 // knives endpoints

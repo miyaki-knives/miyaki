@@ -47,15 +47,15 @@ cartController.getCart = (req, res, next) => {
 };
 
 cartController.deleteFromCart = (req, res, next) => {
-	const { userid, knifeid } = req.query;
+	const { user_id, knife_id } = req.body;
 
 	db.query(
 		'DELETE FROM carts WHERE customer_id = $1 and knife_id = $2 RETURNING *',
-		[userid, knifeid]
+		[user_id, knife_id]
 	)
 		.then((data) => {
 			console.log(data.rows);
-			res.locals.updatedCart = data.rows;
+			res.locals.deletedItems = data.rows;
 			return next();
 		})
 		.catch((err) =>
