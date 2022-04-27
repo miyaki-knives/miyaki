@@ -10,7 +10,11 @@ function HeaderContainer(props) {
       </div>
       <div className='RightContainer'>
         {/* <div className='cartIcon'>Cart </div> */}
-        <Cart cartList={props.cartList} isLoggedIn={props.isLoggedIn} />
+        <Cart
+          cartList={props.cartList}
+          isLoggedIn={props.isLoggedIn}
+          userID={props.userID}
+        />
         <Login handleClick={props.handleClick} isLoggedIn={props.isLoggedIn} />
       </div>
     </div>

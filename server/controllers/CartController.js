@@ -29,7 +29,7 @@ cartController.getCart = (req, res, next) => {
   const queryStr = 'SELECT * FROM carts WHERE customer_id = $1';
   db.query(queryStr, [id])
     .then((data) => {
-      console.log(data);
+      console.log(data.rows);
       res.locals.cart = data.rows;
       next();
     })

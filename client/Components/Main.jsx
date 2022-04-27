@@ -11,18 +11,18 @@ function Main() {
   // cartList State that stores the list of cart items
   const [cartList, setCartList] = useState([]);
 
-  // const fetchCart = () => {
-  //   fetch(`/cart/${userID}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setCartList(data);
-  //       console.log(data);
-  //     });
-  // };
+  const fetchCart = () => {
+    fetch(`/cart/${userID}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCartList(data);
+        console.log(data);
+      });
+  };
 
-  // useEffect(() => {
-  //   fetchCart();
-  // }, []);
+  useEffect(() => {
+    fetchCart();
+  }, [isLoggedIn]);
 
   function handleClick(e) {
     //{ knife_id, customer_id, quantity} what I'm using for variable names
