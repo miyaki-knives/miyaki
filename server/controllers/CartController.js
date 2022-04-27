@@ -5,9 +5,9 @@ const cartController = {};
 cartController.addToCart = (req, res, next) => {
   console.log('req.body: ', req.body);
   const { userID, knife_id, quantity } = req.body;
-  knife_id = Number(knife_id);
-  db.query('INSERT INTO cart VALUES (DEFAULT, $1, $2, $3) RETURNING *', [
-    knife_id,
+  knife_id_num = Number(knife_id);
+  db.query('INSERT INTO carts VALUES (DEFAULT, $1, $2, $3) RETURNING *', [
+    knife_id_num,
     quantity,
     userID,
   ])
@@ -25,7 +25,45 @@ cartController.addToCart = (req, res, next) => {
 };
 
 cartController.getCart = (req, res, next) => {
-  console.log(req.body);
+  const { id } = req.params;
+  const queryStr = `SELECT c.*, k.name as name, k.price as price, k.img as image
+	FROM carts c
+	JOIN knives k
+	ON c.knife_id = k.knife_id
+	WHERE c.customer_id = $1
+	`;
+  db.query(queryStr, [id])
+    .then((data) => {
+      console.log(data);
+      res.locals.cart = data.rows;
+      next();
+    })
+    .catch((err) =>
+      next({
+        log: 'cartController.getCart',
+        message: { err: err },
+      })
+    );
+};
+
+cartController.deleteFromCart = (req, res, next) => {
+  const { userID, knife_id } = req.body;
+
+  db.query(
+    'DELETE FROM carts WHERE customer_id = $1 and knife_id = $2 RETURNING *',
+    [userID, knife_id]
+  )
+    .then((data) => {
+      console.log(data.rows);
+      res.locals.deletedItems = data.rows;
+      return next();
+    })
+    .catch((err) =>
+      next({
+        log: 'cartController.deleteFromCart',
+        message: { err: err },
+      })
+    );
 };
 
 module.exports = cartController;

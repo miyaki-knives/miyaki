@@ -24,6 +24,7 @@ function KnivesContainer(props) {
           isAdmin={props.isAdmin}
           img={knife.img}
           handleClick={props.handleClick}
+          fetchCart={props.fetchCart}
         />
       ));
       if (JSON.stringify(finalRender) !== JSON.stringify(knivesToRender)) {
@@ -31,7 +32,7 @@ function KnivesContainer(props) {
       }
     });
   return (
-    <div id="knivesContainerDiv">
+    <div id='knivesContainerDiv'>
       <div>
         <AdminAddKnife isAdmin={props.isAdmin} />
         <h2>List of Knives</h2>
