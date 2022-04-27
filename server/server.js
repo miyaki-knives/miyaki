@@ -23,18 +23,21 @@ app.get('/', (req, res) =>
 // })
 // handles routing
 const appRouter = express.Router();
-// app.use('/knives', appRouter);
-// app.use('/customers', appRouter);
-// app.use('/cart', appRouter);
 
+// cart endpoints
 app.post('/cart/addToCart', cartController.addToCart, (req, res) => {
 	console.log('res.locals.added: ', res.locals.addedItem);
 	return res.status(200).json(res.locals.addedItem);
-}),
-	// routers
-	app.get('/knives', knifeController.getAllKnives, (req, res) => {
-		return res.status(200).json(res.locals.knives);
-	});
+});
+
+app.get('/cart/:id', cartController.getCart, (req, res) => {
+	return res.status(200).json(res.locals.cart);
+});
+
+// knives endpoints
+app.get('/knives', knifeController.getAllKnives, (req, res) => {
+	return res.status(200).json(res.locals.knives);
+});
 
 app.post('/knives/addKnife', knifeController.createKnife, (req, res) => {
 	return res.status(200).json(res.locals.addedKnife);
@@ -48,10 +51,11 @@ app.put('/knives/:id', knifeController.updateKnife, (req, res) => {
 	return res.status(200).json(res.locals.updatedKnife);
 });
 
+// customer endpoints
 app.get('/customers/:username', customerController.getCustomer, (req, res) => {
 	return res.status(200).json(res.locals.customer);
 });
-//
+
 app.post(
 	'/customers/addCustomer',
 	customerController.createCustomer,

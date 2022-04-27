@@ -25,7 +25,20 @@ cartController.addToCart = (req, res, next) => {
 };
 
 cartController.getCart = (req, res, next) => {
-	console.log(req.body);
+	const { id } = req.params;
+	const queryStr = 'SELECT * FROM carts WHERE customer_id = $1';
+	db.query(queryStr, [id])
+		.then((data) => {
+			console.log(data);
+			res.locals.cart = data.rows;
+			next();
+		})
+		.catch((err) =>
+			next({
+				log: 'cartController.getCart',
+				message: { err: err },
+			})
+		);
 };
 
 module.exports = cartController;
