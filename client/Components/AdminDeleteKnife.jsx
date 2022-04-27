@@ -4,7 +4,9 @@ const AdminDeleteKnife = (props) => {
   const deleteKnife = () => {
     fetch(`/knives/${props.id}`, {
       method: 'DELETE',
-    }).catch((err) => console.log('COULD NOT DELETE:', err));
+    })
+      .then(() => props.fetchCart())
+      .catch((err) => console.log('COULD NOT DELETE:', err));
   };
   if (props.isAdmin) {
     return (
