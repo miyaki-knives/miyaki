@@ -36,6 +36,8 @@ function Login(props) {
   return (
     //ADD: if props.isLoggedIn is true call closeModal
 
+    //Create logout POST request, sending userID as user in req.body
+
     <div>
       <button onClick={openModal} className="signInBtn">
         {props.isLoggedIn ? 'Log Out' : 'Sign In'}
