@@ -50,9 +50,14 @@ function Cart(props) {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        {props.cartList.map((item) => (
-          <div>{item.name}</div>
-        ))}
+        {props.userID &&
+          Array.isArray(props.cartList) &&
+          props.cartList.map((item, index) => (
+            <div key={`item${index}`}>
+              <div>Knife ID: {item.knife_id}</div>
+              <div>Qty: {item.quantity}</div>
+            </div>
+          ))}
         {/* <div className='inputForm'>
           <input type='text' placeholder='Enter Username' id='usernameInput' />
           <br />
