@@ -1,19 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-const AdminDeleteKnife = props => {
+const AdminDeleteKnife = (props) => {
   const deleteKnife = () => {
-    fetch(`./knives/knives/${props.id}`, {
-        method: 'DELETE',
-    })
-    .catch(err => console.log('COULD NOT DELETE:', err))
-  }
+    fetch(`./knives/${props.id}`, {
+      method: 'DELETE',
+    }).catch((err) => console.log('COULD NOT DELETE:', err));
+  };
   if (props.isAdmin) {
     return (
       <div>
-        <button onClick = {deleteKnife}>Delete Knife</button>
+        <button onClick={deleteKnife}>Delete Knife</button>
       </div>
     );
-  } else return <></>
+  } else return <></>;
 };
 
 export default AdminDeleteKnife;
