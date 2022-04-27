@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
+import { TextField, Container, Box, Button } from '@mui/material';
 
 const customStyles = {
   content: {
@@ -15,7 +16,7 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-function Login(props){
+function Login(props) {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -31,33 +32,62 @@ function Login(props){
 
   useEffect(() => {
     closeModal();
-}, [props.isLoggedIn])
-
+  }, [props.isLoggedIn]);
 
   return (
-    //ADD: if props.isLoggedIn is true call closeModal 
-    
+    //ADD: if props.isLoggedIn is true call closeModal
+
     <div>
-      <button onClick={openModal} className = 'signInBtn'>{props.isLoggedIn ? 'Log Out' : 'Sign In'}</button> 
+      <Button variant='contained' onClick={openModal} className='signInBtn'>
+        {props.isLoggedIn ? 'Log Out' : 'Sign In'}
+      </Button>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
       >
-        
-        
-         <div className = 'inputForm'> 
-          <input type='text' placeholder = 'Enter Username' id='usernameInput' />
-          <br />
-          <input type='password' placeholder='Enter Password' id='passwordInput' />
-          <br />
-          <button onClick={props.handleClick} id='loginButton'>Login</button>
-          <button onClick={props.handleClick} id='signUpButton'>Sign up</button>
-        </div>
-        
+        <Container maxWidth='sm'>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <div className='inputForm'>
+              <TextField
+                type='text'
+                placeholder='Enter Username'
+                id='usernameInput'
+              />
+              <br />
+              <TextField
+                type='password'
+                placeholder='Enter Password'
+                id='passwordInput'
+              />
+
+              <br />
+              <Button
+                variant='contained'
+                onClick={props.handleClick}
+                id='loginButton'
+              >
+                Login
+              </Button>
+              <Button
+                variant='contained'
+                onClick={props.handleClick}
+                id='signUpButton'
+              >
+                Sign up
+              </Button>
+            </div>
+          </Box>
+        </Container>
       </Modal>
     </div>
   );
 }
 
-export default Login
+export default Login;
