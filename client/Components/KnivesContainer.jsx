@@ -5,7 +5,7 @@ import AdminAddKnife from './AdminAddKnife.jsx';
 function KnivesContainer(props) {
 	const [knivesToRender, setKnivesToRender] = useState([]);
 
-	fetch(`/knives/knives/`)
+	fetch(`/knives/`)
 		.then((data) => data.json())
 		.then((array) => {
 			const finalRender = array.map((knife) => (

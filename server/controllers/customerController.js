@@ -24,10 +24,8 @@ customerController.createCustomer = (req, res, next) => {
 };
 
 customerController.deleteCustomer = (req, res, next) => {
-	const { customer_id } = req.params;
-	db.query('DELETE FROM customers WHERE customer_id = $1 RETURNING *', [
-		customer_id,
-	])
+	const { id } = req.params;
+	db.query('DELETE FROM customers WHERE customer_id = $1 RETURNING *', [id])
 		.then((data) => {
 			res.locals.deletedCustomer = data.rows;
 			return next();
@@ -42,10 +40,10 @@ customerController.deleteCustomer = (req, res, next) => {
 
 customerController.updateCustomer = (req, res, next) => {
 	const { username } = req.params;
-	const { password } = req.body;
+	const { isAdmin } = req.body;
 	db.query(
 		'UPDATE customers SET password = $1 WHERE username = $2 RETURNING *',
-		[password, username]
+		[isAdmin, username]
 	)
 		.then((data) => {
 			res.locals.updatedCustomer = data.rows;
@@ -60,9 +58,9 @@ customerController.updateCustomer = (req, res, next) => {
 };
 
 customerController.getCustomer = (req, res, next) => {
-	const queryStr = 'SELECT * FROM customers WHERE customer_id = $1';
-	const { customer_id } = req.params;
-	db.query(queryStr, [customer_id])
+	const queryStr = 'SELECT * FROM customers WHERE username = $1';
+	const { username } = req.params;
+	db.query(queryStr, [username])
 		.then((data) => {
 			res.locals.customer = data.rows;
 			return next();
@@ -77,9 +75,9 @@ customerController.getCustomer = (req, res, next) => {
 
 customerController.login = (req, res, next) => {
 	const queryStr = 'SELECT * FROM customers WHERE username = $1';
-	const { username, password } = req.body;
+	const { user, password } = req.body;
 	// console.log('req.body:  ', req.body);
-	db.query(queryStr, [username])
+	db.query(queryStr, [user])
 		.then((data) => {
 			if (password !== data.rows[0].password) {
 				res.locals.authentication = {
@@ -108,5 +106,8 @@ customerController.login = (req, res, next) => {
 			})
 		);
 };
+
+// I'm in here too... just waiting for a fellow
+// should we start at just reading the lis
 
 module.exports = customerController;

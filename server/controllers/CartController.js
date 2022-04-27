@@ -4,8 +4,9 @@ const cartController = {};
 
 cartController.addToCart = (req, res, next) => {
 	console.log('req.body: ', req.body);
-	const { knife_id, quantity, userID } = req.body;
-	db.query('INSERT INTO carts VALUES (DEFAULT, $1, $2, $3) RETURNING *', [
+	const { userID, knife_id, quantity } = req.body;
+	knife_id = Number(knife_id);
+	db.query('INSERT INTO cart VALUES (DEFAULT, $1, $2, $3) RETURNING *', [
 		knife_id,
 		quantity,
 		userID,
@@ -25,7 +26,6 @@ cartController.addToCart = (req, res, next) => {
 
 cartController.getCart = (req, res, next) => {
 	console.log(req.body);
-	// need to write this function to send cart to frontend
 };
 
 module.exports = cartController;

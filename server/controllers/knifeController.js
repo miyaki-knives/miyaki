@@ -37,8 +37,8 @@ knifeController.createKnife = (req, res, next) => {
 };
 
 knifeController.deleteKnife = (req, res, next) => {
-	const { knife_id } = req.params;
-	db.query('DELETE FROM knives WHERE knife_id = $1 RETURNING *', [knife_id])
+	const { id } = req.params;
+	db.query('DELETE FROM knives WHERE knife_id = $1 RETURNING *', [id])
 		.then((data) => {
 			console.log(data);
 			res.locals.deletedKnife = data.rows;
@@ -53,11 +53,11 @@ knifeController.deleteKnife = (req, res, next) => {
 };
 
 knifeController.updateKnife = (req, res, next) => {
-	const { knife_id } = req.params;
-	const { price } = req.body;
+	const { id } = req.params;
+	const { newPrice } = req.body;
 	db.query('UPDATE knives SET price = $1 WHERE knife_id = $2 RETURNING *', [
-		price,
-		knife_id,
+		newPrice,
+		id,
 	])
 		.then((data) => {
 			res.locals.updatedKnife = data.rows;

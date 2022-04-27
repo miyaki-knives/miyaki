@@ -23,41 +23,36 @@ app.get('/', (req, res) =>
 // })
 // handles routing
 const appRouter = express.Router();
+// app.use('/knives', appRouter);
+// app.use('/customers', appRouter);
+// app.use('/cart', appRouter);
 
-appRouter.post('/cart/addToCart', cartController.addToCart, (req, res) => {
+app.post('/cart/addToCart', cartController.addToCart, (req, res) => {
 	console.log('res.locals.added: ', res.locals.addedItem);
 	return res.status(200).json(res.locals.addedItem);
 }),
 	// routers
-	appRouter.get('/knives', knifeController.getAllKnives, (req, res) => {
+	app.get('/knives', knifeController.getAllKnives, (req, res) => {
 		return res.status(200).json(res.locals.knives);
 	});
 
-appRouter.post('/knives/addKnife', knifeController.createKnife, (req, res) => {
+app.post('/knives/addKnife', knifeController.createKnife, (req, res) => {
 	return res.status(200).json(res.locals.addedKnife);
 });
 
-appRouter.delete(
-	'/knives/:knife_id',
-	knifeController.deleteKnife,
-	(req, res) => {
-		return res.status(200).json(res.locals.deletedKnife);
-	}
-);
+app.delete('/knives/:id', knifeController.deleteKnife, (req, res) => {
+	return res.status(200).json(res.locals.deletedKnife);
+});
 
-appRouter.put('/knives/:knife_id', knifeController.updateKnife, (req, res) => {
+app.put('/knives/:id', knifeController.updateKnife, (req, res) => {
 	return res.status(200).json(res.locals.updatedKnife);
 });
 
-appRouter.get(
-	'/customers/:customer_id',
-	customerController.getCustomer,
-	(req, res) => {
-		return res.status(200).json(res.locals.customer);
-	}
-);
+app.get('/customers/:username', customerController.getCustomer, (req, res) => {
+	return res.status(200).json(res.locals.customer);
+});
 //
-appRouter.post(
+app.post(
 	'/customers/addCustomer',
 	customerController.createCustomer,
 	customerController.login,
@@ -66,25 +61,17 @@ appRouter.post(
 	}
 );
 //
-appRouter.post('/customers/login', customerController.login, (req, res) => {
+app.post('/customers/login', customerController.login, (req, res) => {
 	return res.status(200).json(res.locals.authentication);
 });
 
-appRouter.delete(
-	'/customers/:customer_id',
-	customerController.deleteCustomer,
-	(req, res) => {
-		return res.status(200).json(res.locals.deletedCustomer);
-	}
-);
+app.delete('/customers/:id', customerController.deleteCustomer, (req, res) => {
+	return res.status(200).json(res.locals.deletedCustomer);
+});
 
-appRouter.put(
-	'/customers/:customer_id',
-	customerController.updateCustomer,
-	(req, res) => {
-		return res.status(200).json(res.locals.updatedCustomer);
-	}
-);
+app.put('/customers/:id', customerController.updateCustomer, (req, res) => {
+	return res.status(200).json(res.locals.updatedCustomer);
+});
 
 // catch-all router handler for any request to an unknown route
 app.use('*', (req, res) => {
