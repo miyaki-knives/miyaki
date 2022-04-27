@@ -34,6 +34,10 @@ app.get('/cart/:id', cartController.getCart, (req, res) => {
 	return res.status(200).json(res.locals.cart);
 });
 
+app.delete('/cart?userid&knifeid', cartController.getCart, (req, res) => {
+	return res.status(200).json(res.locals.updatedCart);
+});
+
 // knives endpoints
 app.get('/knives', knifeController.getAllKnives, (req, res) => {
 	return res.status(200).json(res.locals.knives);
