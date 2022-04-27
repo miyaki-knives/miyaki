@@ -16,8 +16,20 @@ function Main() {
       .then((res) => res.json())
       .then((data) => {
         setCartList(data);
-        console.log(data);
       });
+  };
+
+  const deleteFromCart = (userID, knife_id) => {
+    fetch(`/cart/deleteFromCart`, {
+      method: 'POST',
+      body: JSON.stringify({
+        userID,
+        knife_id,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => res.json())
+      .then(() => fetchCart());
   };
 
   useEffect(() => {
@@ -45,6 +57,7 @@ function Main() {
         headers: { 'Content-Type': 'application/json' },
       })
         .then((res) => res.json())
+        .then(() => fetchCart())
         // .then((data) => consol, e.log('add to cart: ', data))
         .catch((err) => console.log('error adding knife:', err));
     }
@@ -127,6 +140,7 @@ function Main() {
           username={username}
           userID={userID}
           cartList={cartList}
+          deleteFromCart={deleteFromCart}
         />
       </div>
       <div>
@@ -135,6 +149,7 @@ function Main() {
           isLoggedIn={isLoggedIn}
           isAdmin={isAdmin}
           handleClick={handleClick}
+          fetchCart={fetchCart}
         />
       </div>
     </>

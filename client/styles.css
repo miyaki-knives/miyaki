@@ -1,12 +1,12 @@
 body {
   margin: 0;
   padding: 0;
-  }
+}
 
-  #root {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 .HeaderContainer {
   display: flex;

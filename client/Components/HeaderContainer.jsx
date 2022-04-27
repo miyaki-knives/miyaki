@@ -14,6 +14,7 @@ function HeaderContainer(props) {
           cartList={props.cartList}
           isLoggedIn={props.isLoggedIn}
           userID={props.userID}
+          deleteFromCart={props.deleteFromCart}
         />
         <Login handleClick={props.handleClick} isLoggedIn={props.isLoggedIn} />
       </div>
