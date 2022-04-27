@@ -25,26 +25,24 @@ function Cart(props) {
     setIsOpen(false);
   }
 
-  //   useEffect(() => {
-  //       fetchCart();
-  //   }, [])
-
   useEffect(() => {
     closeModal();
   }, [props.isLoggedIn]);
 
-  return (
-    //ADD: if props.isLoggedIn is true call closeModal
+  const getTotalCost = (productList) => {
+    return productList.reduce(
+      (totalCost, { price: itemCost }) => totalCost + parseFloat(itemCost),
+      0
+    );
+  };
 
+  return (
     <div>
       {props.isLoggedIn && (
         <button onClick={openModal} className='signInBtn'>
           Cart
         </button>
       )}
-      {/* <button onClick={openModal} className='signInBtn'>
-        {props.isLoggedIn ? 'Cart' : 'Sign In'}
-      </button> */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -56,9 +54,27 @@ function Cart(props) {
             <div key={`item${index}`}>
               <div>Knife: {item.name}</div>
               <div>Price: {item.price}</div>
-              <button>Delete</button>
+
+              <button
+                onClick={() => {
+                  props.deleteFromCart(props.userID, item.knife_id);
+                }}
+              >
+                Delete
+              </button>
             </div>
           ))}
+        {props.userID &&
+          Array.isArray(props.cartList) &&
+          props.cartList.length > 0 && (
+            <div>
+              Total:
+              {getTotalCost(props.cartList)}
+            </div>
+          )}
+        {props.userID &&
+          Array.isArray(props.cartList) &&
+          props.cartList.length === 0 && <div>Your cart is empty.</div>}
       </Modal>
     </div>
   );

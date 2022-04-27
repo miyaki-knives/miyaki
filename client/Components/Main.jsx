@@ -16,8 +16,20 @@ function Main() {
       .then((res) => res.json())
       .then((data) => {
         setCartList(data);
-        console.log(data);
       });
+  };
+
+  const deleteFromCart = (userID, knife_id) => {
+    fetch(`/cart/deleteFromCart`, {
+      method: 'POST',
+      body: JSON.stringify({
+        userID,
+        knife_id,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => res.json())
+      .then(() => fetchCart());
   };
 
   useEffect(() => {
@@ -128,6 +140,7 @@ function Main() {
           username={username}
           userID={userID}
           cartList={cartList}
+          deleteFromCart={deleteFromCart}
         />
       </div>
       <div>
