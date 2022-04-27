@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/server.js",
     "build": "NODE_ENV=production webpack",
-    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"cross-env NODE_ENV=development nodemon server/server.js\""
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"cross-env NODE_ENV=development nodemon server/server.js\"",
+    "cypress": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "concurrently": "^7.1.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
+    "cypress": "^9.6.0",
     "eslint": "^8.14.0",
     "html-webpack-plugin": "^5.5.0",
     "isomorphic-fetch": "^3.0.0",

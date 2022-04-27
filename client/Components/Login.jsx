@@ -15,7 +15,7 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-function Login(props){
+function Login(props) {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -31,33 +31,38 @@ function Login(props){
 
   useEffect(() => {
     closeModal();
-}, [props.isLoggedIn])
-
+  }, [props.isLoggedIn]);
 
   return (
-    //ADD: if props.isLoggedIn is true call closeModal 
-    
+    //ADD: if props.isLoggedIn is true call closeModal
+
     <div>
-      <button onClick={openModal} className = 'signInBtn'>{props.isLoggedIn ? 'Log Out' : 'Sign In'}</button> 
+      <button onClick={openModal} className="signInBtn">
+        {props.isLoggedIn ? 'Log Out' : 'Sign In'}
+      </button>
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={modalIsOpen && !props.isLoggedIn}
         onRequestClose={closeModal}
-        style={customStyles}
-      >
-        
-        
-         <div className = 'inputForm'> 
-          <input type='text' placeholder = 'Enter Username' id='usernameInput' />
+        style={customStyles}>
+        <div className="inputForm">
+          <input type="text" placeholder="Enter Username" id="usernameInput" />
           <br />
-          <input type='password' placeholder='Enter Password' id='passwordInput' />
+          <input
+            type="password"
+            placeholder="Enter Password"
+            id="passwordInput"
+          />
           <br />
-          <button onClick={props.handleClick} id='loginButton'>Login</button>
-          <button onClick={props.handleClick} id='signUpButton'>Sign up</button>
+          <button onClick={props.handleClick} id="loginButton">
+            Login
+          </button>
+          <button onClick={props.handleClick} id="signUpButton">
+            Sign up
+          </button>
         </div>
-        
       </Modal>
     </div>
   );
 }
 
-export default Login
+export default Login;
