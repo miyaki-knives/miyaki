@@ -11,8 +11,8 @@ function KnivesContainer(props) {
       const finalRender = array.map((knife) => (
         <Knife
           username={props.username}
-          key={knife.id}
-          id={knife.id}
+          key={knife.knife_id}
+          id={knife.knife_id}
           name={knife.name}
           length={knife.length}
           steel_type={knife.steel_type}
@@ -31,7 +31,7 @@ function KnivesContainer(props) {
       }
     });
   return (
-    <div id='knivesContainerDiv'>
+    <div id="knivesContainerDiv">
       <div>
         <AdminAddKnife isAdmin={props.isAdmin} />
         <h2>List of Knives</h2>

@@ -12,68 +12,71 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-  app.use('/', express.static(path.join(__dirname, '../build')));
+app.use('/', express.static(path.join(__dirname, '../build')));
 
-  app.get('/', (req, res) =>
-    res.status(200).sendFile(path.join(__dirname, '../build/index.html'))
-  );
+app.get('/', (req, res) =>
+  res.status(200).sendFile(path.join(__dirname, '../build/index.html'))
+);
 
 // app.post('/api', (req, res) => {
 //   res.status(200).json({isLogged=In: true})
 // })
 // handles routing
 const appRouter = express.Router();
-app.use('/knives', appRouter);
-app.use('/customers', appRouter);
-app.use('/cart', appRouter);
+// app.use('/knives', appRouter);
+// app.use('/customers', appRouter);
+// app.use('/cart', appRouter);
 
-appRouter.post('/cart/addToCart', cartController.addToCart, (req, res) => {
-  console.log('res.locals.added: ', res.locals.addedItem) 
-  return res.status(200).json(res.locals.addedItem)
-}), 
+app.post('/cart/addToCart', cartController.addToCart, (req, res) => {
+  console.log('res.locals.added: ', res.locals.addedItem);
+  return res.status(200).json(res.locals.addedItem);
+}),
+  // routers
+  app.get('/knives', knifeController.getAllKnives, (req, res) => {
+    return res.status(200).json(res.locals.knives);
+  });
 
-// routers
-appRouter.get('/knives', knifeController.getAllKnives, (req, res) => {
-  return res.status(200).json(res.locals.knives);
-});
-
-appRouter.post('/knives/addKnife', knifeController.createKnife, (req, res) => {
+app.post('/knives/addKnife', knifeController.createKnife, (req, res) => {
   return res.status(200).json(res.locals.addedKnife);
 });
 
-appRouter.delete('/knives/:id', knifeController.deleteKnife, (req, res) => {
+app.delete('/knives/:id', knifeController.deleteKnife, (req, res) => {
   return res.status(200).json(res.locals.deletedKnife);
 });
 
-appRouter.put('/knives/:id', knifeController.updateKnife, (req, res) => {
+app.put('/knives/:id', knifeController.updateKnife, (req, res) => {
   return res.status(200).json(res.locals.updatedKnife);
 });
 
-appRouter.get('/customers/:username', customerController.getCustomer, (req, res) => {
+app.get('/customers/:username', customerController.getCustomer, (req, res) => {
   return res.status(200).json(res.locals.customer);
 });
 //
-appRouter.post('/customers/addCustomer', customerController.createCustomer, customerController.login, (req, res) => {
-  return res.status(200).json(res.locals.authentication);
-});
+app.post(
+  '/customers/addCustomer',
+  customerController.createCustomer,
+  customerController.login,
+  (req, res) => {
+    return res.status(200).json(res.locals.authentication);
+  }
+);
 //
-appRouter.post('/customers/login', customerController.login, (req, res) => {
+app.post('/customers/login', customerController.login, (req, res) => {
   return res.status(200).json(res.locals.authentication);
 });
 
-appRouter.delete('/customers/:id', customerController.deleteCustomer, (req, res) => {
+app.delete('/customers/:id', customerController.deleteCustomer, (req, res) => {
   return res.status(200).json(res.locals.deletedCustomer);
 });
 
-appRouter.put('/customers/:id', customerController.updateCustomer, (req, res) => {
+app.put('/customers/:id', customerController.updateCustomer, (req, res) => {
   return res.status(200).json(res.locals.updatedCustomer);
 });
-
 
 // catch-all router handler for any request to an unknown route
 app.use('*', (req, res) => {
   return res.status(404).send('ERROR, ROUTE NOT FOUND');
-})
+});
 
 // global error handling
 app.use((err, req, res, next) => {
@@ -87,7 +90,7 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () =>{
+app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
 
