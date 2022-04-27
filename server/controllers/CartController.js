@@ -5,9 +5,9 @@ const cartController = {};
 cartController.addToCart = (req, res, next) => {
   console.log('req.body: ', req.body);
   const { userID, knife_id, quantity } = req.body;
-  knife_id = Number(knife_id);
-  db.query('INSERT INTO cart VALUES (DEFAULT, $1, $2, $3) RETURNING *', [
-    knife_id,
+  knife_id_num = Number(knife_id);
+  db.query('INSERT INTO carts VALUES (DEFAULT, $1, $2, $3) RETURNING *', [
+    knife_id_num,
     quantity,
     userID,
   ])

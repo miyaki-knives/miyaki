@@ -8,6 +8,21 @@ function Main() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  // cartList State that stores the list of cart items
+  const [cartList, setCartList] = useState([]);
+
+  // const fetchCart = () => {
+  //   fetch(`/cart/${userID}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCartList(data);
+  //       console.log(data);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   fetchCart();
+  // }, []);
 
   function handleClick(e) {
     //{ knife_id, customer_id, quantity} what I'm using for variable names
@@ -30,9 +45,10 @@ function Main() {
         headers: { 'Content-Type': 'application/json' },
       })
         .then((res) => res.json())
-        .then((data) => consol, e.log('add to cart: ', data))
+        // .then((data) => consol, e.log('add to cart: ', data))
         .catch((err) => console.log('error adding knife:', err));
     }
+    //to delete: fetch(`/cart/${userID}/${knife_id}`, {
 
     if (e.target.id === 'loginButton') {
       console.log(document.querySelector('#usernameInput'));
@@ -109,6 +125,8 @@ function Main() {
           isLoggedIn={isLoggedIn}
           isAdmin={isAdmin}
           username={username}
+          userID={userID}
+          cartList={cartList}
         />
       </div>
       <div>
