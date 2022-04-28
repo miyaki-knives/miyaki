@@ -5,26 +5,24 @@ const PORT = 3000;
 const customerController = require('./controllers/customerController');
 const knifeController = require('./controllers/knifeController');
 const cartController = require('./controllers/CartController');
+const cookieController = require('./controllers/cookieController');
+const cookieParser = require('cookie-parser');
 // invoke express
 const app = express();
 
 // parse request body using express
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, '../build')));
 
 app.get('/', (req, res) =>
+	// check if cookie exists, if it does change sign in to log out
 	res.status(200).sendFile(path.join(__dirname, '../build/index.html'))
 );
 
-// app.post('/api', (req, res) => {
-//   res.status(200).json({isLogged=In: true})
-// })
-// handles routing
-const appRouter = express.Router();
-
-// cart endpoints
+// cart endpoints:
 
 // add to cart
 app.post('/cart/addToCart', cartController.addToCart, (req, res) => {
@@ -68,13 +66,24 @@ app.post(
 	'/customers/addCustomer',
 	customerController.createCustomer,
 	customerController.login,
+	cookieController.setCookie,
 	(req, res) => {
 		return res.status(200).json(res.locals.authentication);
 	}
 );
-//
-app.post('/customers/login', customerController.login, (req, res) => {
-	return res.status(200).json(res.locals.authentication);
+// user login endpoint
+app.post(
+	'/customers/login',
+	customerController.login,
+	cookieController.setCookie,
+	(req, res) => {
+		return res.status(200).json(res.locals.authentication);
+	}
+);
+
+// user logout endpoint
+app.post('/customers/logout', customerController.logout, (req, res) => {
+	return res.end();
 });
 
 app.delete('/customers/:id', customerController.deleteCustomer, (req, res) => {
