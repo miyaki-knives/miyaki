@@ -20,18 +20,23 @@ describe('Logging in as admin, adding and deleting from knife inventory', () => 
     cy.findByRole('button', { name: /log out/i }).should('be.visible');
   });
 
+  const typeOptions = { scrollBehavior: 'center' };
   // Add a knife
   it('fills out the form to add a new knife', () => {
-    cy.findByPlaceholderText(/name/i).type('Butter Knife');
-    cy.findByPlaceholderText(/length/i).type(100);
-    cy.findByPlaceholderText(/steel type/i).type('Carbon Steel');
-    cy.findByPlaceholderText(/price/i).type(999);
-    cy.get('[name="type"]').type('Buttery!!!');
+    cy.findByPlaceholderText(/name/i).type('Butter Knife', typeOptions);
+    cy.findByPlaceholderText(/length/i).type(100, typeOptions);
+    cy.findByPlaceholderText(/steel type/i).type('Carbon Steel', typeOptions);
+    cy.findByPlaceholderText(/price/i).type(999, typeOptions);
+    cy.get('[name="type"]').type('Buttery!!!', typeOptions);
     cy.findByPlaceholderText(/image link/i).type(
-      'https://secure.img1-fg.wfcdn.com/im/41195772/resize-h755-w755%5Ecompr-r85/1524/15247309/Liberty+Euro+Solid+Handle+Butter+Knife.jpg'
+      'https://secure.img1-fg.wfcdn.com/im/41195772/resize-h755-w755%5Ecompr-r85/1524/15247309/Liberty+Euro+Solid+Handle+Butter+Knife.jpg',
+      typeOptions
     );
-    cy.findByPlaceholderText(/hrc/i).type(10);
-    cy.findByPlaceholderText(/bevel/i).type('Do butter knives have bevels?');
+    cy.findByPlaceholderText(/hrc/i).type(10, typeOptions);
+    cy.findByPlaceholderText(/bevel/i).type(
+      'Do butter knives have bevels?',
+      typeOptions
+    );
     cy.findByRole('button', { name: /add knife/i }).click();
   });
 
@@ -41,22 +46,32 @@ describe('Logging in as admin, adding and deleting from knife inventory', () => 
       .should('be.visible');
   });
 
-  it('adds knives to the cart', () => {
+  it('starts with an empty cart', () => {
     // cy.get('#cartBtn')
-    //   .scrollIntoView({ easing: 'linear', duration: 1000, timeout: 1000 })
+    //   .scrollIntoView({ easing: 'linear', duration: 500 })
     //   .click();
-    // cy.get('.ReactModal__Overlay').click();
-    // cy.get('#knife-4').scrollIntoView();
+    // cy.get('.ReactModal__Overlay').click({ timeout: 100 });
+  });
+
+  it('adds knives to the cart', () => {
     cy.get('#knife-4')
-      .scrollIntoView({ easing: 'linear', duration: 500 })
+      .scrollIntoView({ easing: 'linear', duration: 100 })
       .click();
-    cy.get('#knife-5').scrollIntoView().click();
-    cy.get('#knife-6').scrollIntoView().click();
+    cy.get('#knife-5')
+      .scrollIntoView({ easing: 'linear', duration: 100 })
+      .click();
+    cy.get('#knife-6')
+      .scrollIntoView({ easing: 'linear', duration: 100 })
+      .click();
     cy.get('#knife-7')
-      .scrollIntoView({ easing: 'linear', duration: 500 })
+      .scrollIntoView({ easing: 'linear', duration: 100 })
       .click();
-    cy.get('#knife-8').scrollIntoView().click();
-    cy.get('#knife-9').scrollIntoView().click();
+    cy.get('#knife-8')
+      .scrollIntoView({ easing: 'linear', duration: 100 })
+      .click();
+    cy.get('#knife-9')
+      .scrollIntoView({ easing: 'linear', duration: 100 })
+      .click();
   });
 
   it('shows up in the cart and can be deleted', () => {
@@ -69,6 +84,9 @@ describe('Logging in as admin, adding and deleting from knife inventory', () => 
     cy.get('.ReactModal__Content > :nth-child(1) > :nth-child(2)').should(
       'be.visible'
     );
+  });
+  it('deletes items from the cart', () => {
+    cy.get('[id^=btn]').click({ multiple: true, force: true });
   });
 
   // fill out new knife form
