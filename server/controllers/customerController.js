@@ -114,12 +114,12 @@ customerController.logout = (req, res, next) => {
 		.then((data) => {
 			// console.log(data.rows);
 			// console.log(req.cookies);
-			if (data.rows.customer_id == req.cookies[`${user}`]) {
-				res.clearCookie(`${user}`);
-				// console.log(req.cookies);
-				console.log(`cookie ${user} was deleted`);
-			}
-			return next();
+			// if (data.rows.customer_id == req.cookies[`ssid`]) {
+			res.clearCookie(`ssid`);
+			// console.log(req.cookies);
+			console.log(`cookie ssid was deleted`);
+			// }
+			next();
 		})
 		.catch((err) =>
 			next({

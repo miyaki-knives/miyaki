@@ -10,7 +10,8 @@ cookieController.setCookie = (req, res, next) => {
 	// find userid and store in a cookie
 	db.query(queryStr, [user])
 		.then((data) => {
-			res.cookie(`${user}`, data.rows[0].customer_id, {
+			// res.cookie(`${user}`, data.rows[0].customer_id, {
+			res.cookie(`ssid`, data.rows[0].customer_id, {
 				// 24 hours
 				maxAge: 1000 * 60 * 60 * 24,
 				secure: true,
@@ -34,7 +35,7 @@ cookieController.setCookie = (req, res, next) => {
 // have frontend fetch this response and render page appropriately
 cookieController.confirmCookie = (req, res, next) => {
 	console.log(req.cookies);
-	if (req.cookies) {
+	if (req.cookies.ssid) {
 		res.locals.confirmCookie = { status: true, cookie: req.cookies };
 	} else {
 		res.locals.confirmCookie = false;
