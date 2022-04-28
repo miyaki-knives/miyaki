@@ -8,6 +8,7 @@
 
 import React from 'react';
 import AdminDeleteKnife from './AdminDeleteKnife.jsx';
+import Button from '@mui/material/Button';
 
 const Knife = (props) => {
   const {
@@ -31,9 +32,9 @@ const Knife = (props) => {
   };
 
   return (
-    <div className="knifeBox">
+    <div className='knifeBox'>
       <div>
-        <img src={props.img} height="300" width="300" />
+        <img src={props.img} height='300' width='300' />
       </div>
       <div>{props.name}</div>
       <div>Length: {props.length}mm</div>
@@ -43,9 +44,11 @@ const Knife = (props) => {
       <div>Bevel Symmetry: {props.bevel}</div>
       <div>
         <button
-          className="addToCartButton"
+          variant='contained'
+          className='addToCartButton'
           id={`knife-${props.id}`}
-          onClick={handleAddToCart}>
+          onClick={handleAddToCart}
+        >
           Add to Cart
         </button>
         <AdminDeleteKnife isAdmin={isAdmin} id={id} fetchCart={fetchCart} />
