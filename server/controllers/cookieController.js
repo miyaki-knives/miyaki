@@ -33,11 +33,9 @@ cookieController.setCookie = (req, res, next) => {
 // check if cookie exists, if it does send that cookie exists in response
 // have frontend fetch this response and render page appropriately
 cookieController.confirmCookie = (req, res, next) => {
-	const { user } = req.body;
-	// grab user from cookie
 	console.log(req.cookies);
 	if (req.cookies) {
-		res.locals.confirmCookie = true;
+		res.locals.confirmCookie = { status: true, cookie: req.cookies };
 	} else {
 		res.locals.confirmCookie = false;
 	}
