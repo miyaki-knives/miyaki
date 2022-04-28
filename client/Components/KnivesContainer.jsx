@@ -32,10 +32,11 @@ function KnivesContainer(props) {
       }
     });
   return (
-    <div id="knivesContainerDiv">
+    // only render knives container div if isLoggedIn=true?
+    <div id='knivesContainerDiv'>
+      {/* <h2>Product List</h2> */}
       <div>
         <AdminAddKnife isAdmin={props.isAdmin} fetchCart={props.fetchCart} />
-        <h2>List of Knives</h2>
       </div>
       {knivesToRender}
     </div>

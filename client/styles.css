@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 * {
-  font-family: roboto;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -15,8 +17,9 @@ body {
 .HeaderContainer {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(175, 201, 224);
+  background-color: rgb(20, 21, 21);
   padding: 0px 15px;
+  height: 100px;
 }
 
 .RightContainer {
@@ -38,11 +41,41 @@ body {
 
 .knifeBox {
   max-width: 400px;
-  max-height: 500px;
+  margin: 20px;
+}
+
+.shopping-cart {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+.cart-item {
+  margin-right: 30px;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #knivesContainerDiv {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content: center;
+}
+
+.addToCartButton {
+  background-color: #e7e7e7;
+  border-radius: 4px;
+  padding: 10px 24px;
+  margin: 5px 0;
+  font-family: system-ui;
+}
+
+.addToCartButton:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
