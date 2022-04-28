@@ -43,7 +43,7 @@ function Login(props) {
       </Button>
 
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={modalIsOpen && !props.isLoggedIn}
         onRequestClose={closeModal}
         style={customStyles}
       >

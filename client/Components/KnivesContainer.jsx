@@ -32,9 +32,9 @@ function KnivesContainer(props) {
       }
     });
   return (
-    <div id='knivesContainerDiv'>
+    <div id="knivesContainerDiv">
       <div>
-        <AdminAddKnife isAdmin={props.isAdmin} />
+        <AdminAddKnife isAdmin={props.isAdmin} fetchCart={props.fetchCart} />
         <h2>List of Knives</h2>
       </div>
       {knivesToRender}

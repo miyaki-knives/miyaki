@@ -43,15 +43,15 @@ const Knife = (props) => {
       <div>Type: {props.type}</div>
       <div>Bevel Symmetry: {props.bevel}</div>
       <div>
-        <Button
+        <button
           variant='contained'
           className='addToCartButton'
           id={`knife-${props.id}`}
           onClick={handleAddToCart}
         >
           Add to Cart
-        </Button>
-        <AdminDeleteKnife isAdmin={isAdmin} id={id} />
+        </button>
+        <AdminDeleteKnife isAdmin={isAdmin} id={id} fetchCart={fetchCart} />
       </div>
     </div>
   );
