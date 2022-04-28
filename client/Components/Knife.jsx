@@ -8,7 +8,11 @@
 
 import React from 'react';
 import AdminDeleteKnife from './AdminDeleteKnife.jsx';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 
 const Knife = (props) => {
   const {
@@ -32,28 +36,34 @@ const Knife = (props) => {
   };
 
   return (
-    <div className='knifeBox'>
-      <div>
+    <Card className='knifeBox'>
+      <CardContent>
         <img src={props.img} height='300' width='300' />
-      </div>
-      <div>{props.name}</div>
-      <div>Length: {props.length}mm</div>
-      <div>Steel: {props.steel_type}</div>
-      <div>Price: ${props.price}</div>
-      <div>Type: {props.type}</div>
-      <div>Bevel Symmetry: {props.bevel}</div>
-      <div>
-        <button
-          variant='contained'
-          className='addToCartButton'
-          id={`knife-${props.id}`}
-          onClick={handleAddToCart}
-        >
-          Add to Cart
-        </button>
-        <AdminDeleteKnife isAdmin={isAdmin} id={id} fetchCart={fetchCart} />
-      </div>
-    </div>
+        <div className='knifeBox-info'>
+          <h4>{props.name}</h4>
+          <strong>Length:</strong> {props.length}mm
+          <br />
+          <strong>Steel:</strong> {props.steel_type}
+          <br />
+          <strong>Price:</strong> ${props.price}
+          <br />
+          <strong>Type:</strong> {props.type}
+          <br />
+          <strong>Bevel Symmetry:</strong> {props.bevel}
+          <br />
+          <button
+            className='addToCartButton'
+            id={`knife-${props.id}`}
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </button>
+          <Typography component='legend'>Customer rating</Typography>
+          <Rating name='read-only' value={5} readOnly />
+          <AdminDeleteKnife isAdmin={isAdmin} id={id} fetchCart={fetchCart} />
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 export default Knife;

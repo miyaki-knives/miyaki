@@ -1,5 +1,6 @@
 // import and require all controllers, port initialization, paths, and app(express)
 const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const PORT = 3000;
 const customerController = require('./controllers/customerController');
@@ -9,19 +10,21 @@ const cookieController = require('./controllers/cookieController');
 const cookieParser = require('cookie-parser');
 // invoke express
 const app = express();
-
+app.use(cookieParser());
 // parse request body using express
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, '../build')));
 
-app.get('/', (req, res) =>
-	// check if cookie exists, if it does change sign in to log out
-	res.status(200).sendFile(path.join(__dirname, '../build/index.html'))
-);
+// check if cookie exists at main endpoint
+app.get('/', (req, res) => {
+	res.status(200).sendFile(path.join(__dirname, '../build/index.html'));
+});
 
+app.get('/cookies', cookieController.confirmCookie, (req, res) => {
+	res.status(200).json(res.locals.confirmCookie);
+});
 // cart endpoints:
 
 // add to cart

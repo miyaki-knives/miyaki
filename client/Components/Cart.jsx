@@ -1,6 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
+import { Button } from '@mui/material';
+import checkout from '../assets/checkout.png';
 
 const customStyles = {
   content: {
@@ -35,40 +37,49 @@ function Cart(props) {
       0
     );
   };
-
+  const appleButton =
+    'https://support.pixelunion.net/hc/article_attachments/360060934313/Additional_checkout_buttons_on_the_cart_page.png';
   return (
     <div>
       {props.isLoggedIn && (
-        <button onClick={openModal} className="cartBtn" id="cartBtn">
+        <Button
+          variant="contained"
+          onClick={openModal}
+          className="cartBtn"
+          id="cartBtn">
           Cart
-        </button>
+        </Button>
       )}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}>
+        <h2>Your order:</h2>
         {props.userID &&
           Array.isArray(props.cartList) &&
           props.cartList.map((item, index) => (
-            <div key={`item${index}`}>
-              <div>Knife: {item.name}</div>
-              <div>Price: {item.price}</div>
-
-              <button
-                id={`btn${index}`}
-                onClick={() => {
-                  props.deleteFromCart(props.userID, item.knife_id);
-                }}>
-                Delete
-              </button>
+            <div key={`item${index}`} className="shopping-cart">
+              <div className="cart-item">
+                <div>Knife: {item.name}</div>
+                <div>Price:$ {item.price}</div>
+              </div>
+              <div className="cart-delete-item">
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    props.deleteFromCart(props.userID, item.knife_id);
+                  }}>
+                  Delete
+                </Button>
+              </div>
             </div>
           ))}
         {props.userID &&
           Array.isArray(props.cartList) &&
           props.cartList.length > 0 && (
-            <div>
-              Total:
-              {getTotalCost(props.cartList)}
+            <div className="cart-total">
+              Total: ${getTotalCost(props.cartList)}
+              <img src={appleButton} width="250" />
             </div>
           )}
         {props.userID &&
