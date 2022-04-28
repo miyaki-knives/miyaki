@@ -36,48 +36,46 @@ function Cart(props) {
 		);
 	};
 
-	return (
-		<div>
-			{props.isLoggedIn && (
-				<button onClick={openModal} className='signInBtn'>
-					Cart
-				</button>
-			)}
-			<Modal
-				isOpen={modalIsOpen}
-				onRequestClose={closeModal}
-				style={customStyles}
-			>
-				{props.userID &&
-					Array.isArray(props.cartList) &&
-					props.cartList.map((item, index) => (
-						<div key={`item${index}`}>
-							<div>Knife: {item.name}</div>
-							<div>Price: {item.price}</div>
+  return (
+    <div>
+      {props.isLoggedIn && (
+        <button onClick={openModal} className="cartBtn" id="cartBtn">
+          Cart
+        </button>
+      )}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}>
+        {props.userID &&
+          Array.isArray(props.cartList) &&
+          props.cartList.map((item, index) => (
+            <div key={`item${index}`}>
+              <div>Knife: {item.name}</div>
+              <div>Price: {item.price}</div>
 
-							<button
-								onClick={() => {
-									props.deleteFromCart(props.userID, item.knife_id);
-								}}
-							>
-								Delete
-							</button>
-						</div>
-					))}
-				{props.userID &&
-					Array.isArray(props.cartList) &&
-					props.cartList.length > 0 && (
-						<div>
-							Total:
-							{getTotalCost(props.cartList)}
-						</div>
-					)}
-				{props.userID &&
-					Array.isArray(props.cartList) &&
-					props.cartList.length === 0 && <div>Your cart is empty.</div>}
-			</Modal>
-		</div>
-	);
+              <button
+                onClick={() => {
+                  props.deleteFromCart(props.userID, item.knife_id);
+                }}>
+                Delete
+              </button>
+            </div>
+          ))}
+        {props.userID &&
+          Array.isArray(props.cartList) &&
+          props.cartList.length > 0 && (
+            <div>
+              Total:
+              {getTotalCost(props.cartList)}
+            </div>
+          )}
+        {props.userID &&
+          Array.isArray(props.cartList) &&
+          props.cartList.length === 0 && <div>Your cart is empty.</div>}
+      </Modal>
+    </div>
+  );
 }
 
 export default Cart;

@@ -11,7 +11,9 @@ const AdminDeleteKnife = (props) => {
   if (props.isAdmin) {
     return (
       <div>
-        <button onClick={deleteKnife}>Delete Knife</button>
+        <button onClick={deleteKnife} id={`delete${props.id}`}>
+          Delete Knife
+        </button>
       </div>
     );
   } else return <></>;
