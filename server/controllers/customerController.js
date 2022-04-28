@@ -96,7 +96,7 @@ customerController.login = (req, res, next) => {
 			if (data.rows[0].is_admin === true) {
 				res.locals.authentication.isAdmin = true;
 			}
-			console.log(data.rows);
+			// console.log(data.rows);
 			return next();
 		})
 		.catch((err) =>
@@ -107,7 +107,26 @@ customerController.login = (req, res, next) => {
 		);
 };
 
-// I'm in here too... just waiting for a fellow
-// should we start at just reading the lis
+customerController.logout = (req, res, next) => {
+	const { user } = req.body;
+	const queryStr = 'SELECT customer_id FROM customers WHERE username = $1';
+	db.query(queryStr, [user])
+		.then((data) => {
+			// console.log(data.rows);
+			// console.log(req.cookies);
+			if (data.rows.customer_id == req.cookies[`${user}`]) {
+				res.clearCookie(`${user}`);
+				// console.log(req.cookies);
+				console.log(`cookie ${user} was deleted`);
+			}
+			return next();
+		})
+		.catch((err) =>
+			next({
+				log: 'customerController.logout',
+				message: { err: err },
+			})
+		);
+};
 
 module.exports = customerController;

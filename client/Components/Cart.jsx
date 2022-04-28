@@ -3,38 +3,38 @@ import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
 
 const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
+	content: {
+		top: '50%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		transform: 'translate(-50%, -50%)',
+	},
 };
 
 Modal.setAppElement('#root');
 
 function Cart(props) {
-  const [modalIsOpen, setIsOpen] = useState(false);
+	const [modalIsOpen, setIsOpen] = useState(false);
 
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
+	function openModal() {
+		setIsOpen(true);
+	}
+	function closeModal() {
+		setIsOpen(false);
+	}
 
-  useEffect(() => {
-    closeModal();
-  }, [props.isLoggedIn]);
+	useEffect(() => {
+		closeModal();
+	}, [props.isLoggedIn]);
 
-  const getTotalCost = (productList) => {
-    return productList.reduce(
-      (totalCost, { price: itemCost }) => totalCost + parseFloat(itemCost),
-      0
-    );
-  };
+	const getTotalCost = (productList) => {
+		return productList.reduce(
+			(totalCost, { price: itemCost }) => totalCost + parseFloat(itemCost),
+			0
+		);
+	};
 
   return (
     <div>

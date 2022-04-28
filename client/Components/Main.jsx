@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import HeaderContainer from './HeaderContainer.jsx';
 import KnivesContainer from './KnivesContainer.jsx';
+import cutting from '../assets/cutting.jpg';
 
 function Main() {
   const [userID, setUserID] = useState(null);
@@ -142,6 +143,9 @@ function Main() {
           cartList={cartList}
           deleteFromCart={deleteFromCart}
         />
+      </div>
+      <div>
+        <img src={cutting} style={{ height: 'auto', width: '1200px' }} />
       </div>
       <div>
         <KnivesContainer

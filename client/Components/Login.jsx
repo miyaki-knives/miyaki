@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
+import { TextField, Container, Box, Button } from '@mui/material';
 
 const customStyles = {
   content: {
@@ -36,32 +37,54 @@ function Login(props) {
   return (
     //ADD: if props.isLoggedIn is true call closeModal
 
-    //Create logout POST request, sending userID as user in req.body
-
     <div>
-      <button onClick={openModal} className="signInBtn">
+      <Button variant='contained' onClick={openModal} className='signInBtn'>
         {props.isLoggedIn ? 'Log Out' : 'Sign In'}
-      </button>
+      </Button>
+
       <Modal
         isOpen={modalIsOpen && !props.isLoggedIn}
         onRequestClose={closeModal}
-        style={customStyles}>
-        <div className="inputForm">
-          <input type="text" placeholder="Enter Username" id="usernameInput" />
-          <br />
-          <input
-            type="password"
-            placeholder="Enter Password"
-            id="passwordInput"
-          />
-          <br />
-          <button onClick={props.handleClick} id="loginButton">
-            Login
-          </button>
-          <button onClick={props.handleClick} id="signUpButton">
-            Sign up
-          </button>
-        </div>
+        style={customStyles}
+      >
+        <Container maxWidth='sm'>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <div className='inputForm'>
+              <TextField
+                type='text'
+                placeholder='Enter Username'
+                id='usernameInput'
+              />
+              <br />
+              <TextField
+                type='password'
+                placeholder='Enter Password'
+                id='passwordInput'
+              />
+
+              <br />
+              <Button
+                variant='contained'
+                onClick={props.handleClick}
+                id='loginButton'
+              >
+                Login
+              </Button>
+              <Button
+                variant='contained'
+                onClick={props.handleClick}
+                id='signUpButton'
+              >
+                Sign up
+              </Button>
+            </div>
+          </Box>
+        </Container>
       </Modal>
     </div>
   );

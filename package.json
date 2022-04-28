@@ -26,7 +26,6 @@
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.3",
     "@reduxjs/toolkit": "^1.8.1",
-    "cookie-parser": "^1.4.6",
     "pg": "^8.7.3",
     "postgres": "^3.1.0",
     "prop-types": "^15.8.1",
