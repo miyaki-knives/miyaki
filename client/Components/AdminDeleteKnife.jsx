@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from '@mui/material';
 
 const AdminDeleteKnife = (props) => {
   const deleteKnife = () => {
@@ -11,9 +12,13 @@ const AdminDeleteKnife = (props) => {
   if (props.isAdmin) {
     return (
       <div>
-        <button onClick={deleteKnife} id={`delete${props.id}`}>
+        <Button
+          variant='contained'
+          onClick={deleteKnife}
+          id={`delete${props.id}`}
+        >
           Delete Knife
-        </button>
+        </Button>
       </div>
     );
   } else return <></>;

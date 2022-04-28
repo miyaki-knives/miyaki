@@ -12,6 +12,14 @@ function Main() {
   // cartList State that stores the list of cart items
   const [cartList, setCartList] = useState([]);
 
+  fetch(`/cookies`)
+    // include username in req body
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      if (data) setLoggedIn(true);
+    });
+
   const fetchCart = () => {
     fetch(`/cart/${userID}`)
       .then((res) => res.json())
@@ -142,6 +150,7 @@ function Main() {
           userID={userID}
           cartList={cartList}
           deleteFromCart={deleteFromCart}
+          // fetchCookie={fetchCookie}
         />
       </div>
       <div>
