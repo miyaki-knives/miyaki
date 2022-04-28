@@ -39,15 +39,14 @@ function Cart(props) {
   return (
     <div>
       {props.isLoggedIn && (
-        <button onClick={openModal} className='signInBtn'>
+        <button onClick={openModal} className="cartBtn" id="cartBtn">
           Cart
         </button>
       )}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={customStyles}
-      >
+        style={customStyles}>
         {props.userID &&
           Array.isArray(props.cartList) &&
           props.cartList.map((item, index) => (
@@ -58,8 +57,7 @@ function Cart(props) {
               <button
                 onClick={() => {
                   props.deleteFromCart(props.userID, item.knife_id);
-                }}
-              >
+                }}>
                 Delete
               </button>
             </div>
