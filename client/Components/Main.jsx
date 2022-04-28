@@ -15,8 +15,8 @@ function Main() {
 	fetch(`/cookies`)
 		.then((res) => res.json())
 		.then((data) => {
-			console.log(data);
-			if (data) {
+			console.log(data.cookie);
+			if (data.cookie.ssid) {
 				setLoggedIn(true);
 				for (const key in data.cookie) {
 					setUsername(key);
@@ -82,6 +82,17 @@ function Main() {
 			const user = document.querySelector('#usernameInput').value;
 			const password = document.querySelector('#passwordInput').value;
 
+			// fetch(`/cookies`)
+			// 	.then((res) => res.json())
+			// 	.then((data) => {
+			// 		console.log(data);
+			// 		if (data.status === true) {
+			// 			setLoggedIn(true);
+			// 			for (const key in data.cookie) {
+			// 				setUsername(key);
+			// 				setUserID(data.cookie[key]);
+			// 			}
+			// 		} else {
 			fetch(`/customers/login`, {
 				method: 'POST',
 				body: JSON.stringify({ user, password }),
@@ -104,6 +115,8 @@ function Main() {
 				})
 				// .then(() => console.log('isloggedin: ', isLoggedIn, 'username:  ', username, 'isAdmin: ', isAdmin))
 				.catch((err) => console.log('error in fetch request', err));
+			// 	}
+			// });
 		}
 
 		if (e.target.id === 'signUpButton') {
@@ -155,6 +168,7 @@ function Main() {
 					userID={userID}
 					cartList={cartList}
 					deleteFromCart={deleteFromCart}
+					setLoggedIn={setLoggedIn}
 					// fetchCookie={fetchCookie}
 				/>
 			</div>
