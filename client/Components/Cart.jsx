@@ -43,35 +43,32 @@ function Cart(props) {
     <div>
       {props.isLoggedIn && (
         <Button
-          variant='contained'
+          variant="contained"
           onClick={openModal}
-          className='cartBtn'
-          id='cartBtn'
-        >
+          className="cartBtn"
+          id="cartBtn">
           Cart
         </Button>
       )}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={customStyles}
-      >
+        style={customStyles}>
         <h2>Your order:</h2>
         {props.userID &&
           Array.isArray(props.cartList) &&
           props.cartList.map((item, index) => (
-            <div key={`item${index}`} className='shopping-cart'>
-              <div className='cart-item'>
+            <div key={`item${index}`} className="shopping-cart">
+              <div className="cart-item">
                 <div>Knife: {item.name}</div>
                 <div>Price:$ {item.price}</div>
               </div>
-              <div className='cart-delete-item'>
+              <div className="cart-delete-item">
                 <Button
-                  variant='outlined'
+                  variant="outlined"
                   onClick={() => {
                     props.deleteFromCart(props.userID, item.knife_id);
-                  }}
-                >
+                  }}>
                   Delete
                 </Button>
               </div>
@@ -80,9 +77,9 @@ function Cart(props) {
         {props.userID &&
           Array.isArray(props.cartList) &&
           props.cartList.length > 0 && (
-            <div className='cart-total'>
+            <div className="cart-total">
               Total: ${getTotalCost(props.cartList)}
-              <img src={appleButton} width='250' />
+              <img src={appleButton} width="250" />
             </div>
           )}
         {props.userID &&
