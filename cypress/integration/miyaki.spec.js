@@ -6,17 +6,19 @@ describe('Logging in as admin, adding and deleting from knife inventory', () => 
     // visit website
     cy.visit('http://localhost:8080/');
     // clicks on Sign In button
-    cy.findByRole('button', { name: /sign in/i }).click();
+    // cy.findByRole('button', { name: /log in/i }).click();
+    cy.get('.MuiButton-root').click();
     // inputs admin into username and password
-    cy.findByPlaceholderText(/enter username/i).type('admin');
-    cy.findByPlaceholderText(/enter password/i).type('admin');
+    cy.get('#usernameInput').type('admin');
+    cy.get('#passwordInput').type('admin');
     // clicks on login
-    cy.findByRole('button', { name: /login/i }).click();
+    cy.get('#loginButton').click();
   });
 
-  // check for cart button
-  // check for logout button
+  // // check for cart button
+  // // check for logout button
   it('shows the Cart and Log Out buttons', () => {
+    cy.get('#cartBtn').should('be.visible');
     cy.findByRole('button', { name: /log out/i }).should('be.visible');
   });
 
@@ -44,49 +46,39 @@ describe('Logging in as admin, adding and deleting from knife inventory', () => 
     cy.findByText(/butter knife/i)
       .scrollIntoView({ easing: 'linear', duration: 1000, timeout: 1000 })
       .should('be.visible');
+    // cy.findByRole('button', { name: /delete knife/i }).last();
   });
 
-  it('starts with an empty cart', () => {
-    // cy.get('#cartBtn')
-    //   .scrollIntoView({ easing: 'linear', duration: 500 })
-    //   .click();
-    // cy.get('.ReactModal__Overlay').click({ timeout: 100 });
-  });
+  it('starts with an empty cart', () => {});
 
   it('adds knives to the cart', () => {
     cy.get('#knife-4')
-      .scrollIntoView({ easing: 'linear', duration: 100 })
+      .scrollIntoView({ easing: 'linear', duration: 1000 })
       .click();
-    cy.get('#knife-5')
-      .scrollIntoView({ easing: 'linear', duration: 100 })
-      .click();
-    cy.get('#knife-6')
-      .scrollIntoView({ easing: 'linear', duration: 100 })
-      .click();
-    cy.get('#knife-7')
-      .scrollIntoView({ easing: 'linear', duration: 100 })
-      .click();
-    cy.get('#knife-8')
-      .scrollIntoView({ easing: 'linear', duration: 100 })
-      .click();
-    cy.get('#knife-9')
-      .scrollIntoView({ easing: 'linear', duration: 100 })
-      .click();
+    cy.get('#knife-5').scrollIntoView().click();
+    cy.get('#knife-6').scrollIntoView().click();
+    cy.get('#knife-7').scrollIntoView().click();
+    // cy.get('#knife-8')
+    //   .scrollIntoView({ easing: 'linear', duration: 100 })
+    //   .click();
+    // cy.get('#knife-9')
+    //   .scrollIntoView({ easing: 'linear', duration: 100 })
+    //   .click();
   });
 
-  it('shows up in the cart and can be deleted', () => {
+  it('displays the items in the cart with total price', () => {
     cy.get('#cartBtn')
-      .scrollIntoView({ easing: 'linear', duration: 500 })
+      .scrollIntoView({ easing: 'linear', duration: 1000 })
       .click();
-    cy.get('.ReactModal__Content > :nth-child(1) > :nth-child(1)').should(
-      'be.visible'
-    );
-    cy.get('.ReactModal__Content > :nth-child(1) > :nth-child(2)').should(
-      'be.visible'
-    );
   });
+  it('cart items persist with session after page reload', () => {});
+
   it('deletes items from the cart', () => {
-    cy.get('[id^=btn]').click({ multiple: true, force: true });
+    // cy.get('[id^=btn]').click({ multiple: true, force: true });
+    cy.get(':nth-child(5) > .cart-delete-item > .MuiButton-root').click();
+    cy.get(':nth-child(4) > .cart-delete-item > .MuiButton-root').click();
+    cy.get(':nth-child(3) > .cart-delete-item > .MuiButton-root').click();
+    cy.get(':nth-child(2) > .cart-delete-item > .MuiButton-root').click();
   });
 
   // fill out new knife form

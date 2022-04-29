@@ -36,10 +36,10 @@ const Knife = (props) => {
   };
 
   return (
-    <Card className='knifeBox'>
+    <Card className="knifeBox">
       <CardContent>
-        <img src={props.img} height='300' width='300' />
-        <div className='knifeBox-info'>
+        <img src={props.img} height="300" width="300" />
+        <div className="knifeBox-info">
           <h4>{props.name}</h4>
           <strong>Length:</strong> {props.length}mm
           <br />
@@ -52,15 +52,16 @@ const Knife = (props) => {
           <strong>Bevel Symmetry:</strong> {props.bevel}
           <br />
           <button
-            className='addToCartButton'
+            className="addToCartButton"
             id={`knife-${props.id}`}
-            onClick={handleAddToCart}
-          >
+            onClick={handleAddToCart}>
             Add to Cart
           </button>
-          <Typography component='legend'>Customer rating</Typography>
-          <Rating name='read-only' value={5} readOnly />
-          <AdminDeleteKnife isAdmin={isAdmin} id={id} fetchCart={fetchCart} />
+          <Typography component="legend">Customer rating</Typography>
+          <Rating name="read-only" value={5} readOnly />
+          {isAdmin && props.isLoggedIn && (
+            <AdminDeleteKnife isAdmin={isAdmin} id={id} fetchCart={fetchCart} />
+          )}
         </div>
       </CardContent>
     </Card>
